@@ -1,641 +1,666 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHADOW CALENDAR</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4eaff"><meta name="description" content="SHADOW CALENDAR — des calendriers personnalisés, imprimés avec soin.">
+<title>SHADOW CALENDAR — Plus qu'un calendrier, un souvenir à vie</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap');
+:root{--purple:#7028d8;--deep:#45208d;--pink:#ff70bd;--sky:#dff4ff;--ink:#2b2454;--muted:#686387;--white:#fff;--line:#e7d8ff;--shadow:0 16px 38px rgba(103,53,180,.13)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Nunito,Quicksand,sans-serif;color:var(--ink);background:linear-gradient(180,#dff4ff 0%,#f5eaff 30%,#fff0f8 60%,#f1e9ff 100%);overflow-x:hidden}a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}button{cursor:pointer} .petal{position:fixed;top:-40px;z-index:0;pointer-events:none;animation:fall linear infinite;opacity:.8;font-size:18px}@keyframes fall{to{transform:translate3d(70px,110vh,0) rotate(540deg)}}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.75);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.8)}.nav{max-width:1200px;margin:auto;padding:12px 22px;display:flex;align-items:center;gap:18px}.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}.brand img{width:54px;height:54px;object-fit:contain}.brand-text{font-weight:900;line-height:1.02;font-size:19px;letter-spacing:-.5px}.brand-text span{display:block;color:var(--purple)}.tagline{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.5px}.links{display:flex;align-items:center;justify-content:center;gap:5px;margin:auto}.links a{font-weight:800;font-size:13px;padding:11px 14px;border-radius:30px;transition:.2s}.links a:hover{background:#eee4ff;color:var(--purple)}.nav-actions{display:flex;align-items:center;gap:8px}.pill{border:0;background:white;border-radius:25px;padding:11px 15px;color:var(--ink);font-weight:800;box-shadow:0 5px 16px rgba(85,51,135,.1)}.cart{position:relative}.count{background:#ff5bb5;color:#fff;border-radius:20px;padding:2px 7px;font-size:11px;margin-left:4px}.menu-btn{display:none}
+.hero{max-width:1200px;margin:24px auto 18px;padding:25px 26px;min-height:440px;border-radius:34px;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;align-items:center;background:linear-gradient(125deg,rgba(255,255,255,.82),rgba(239,224,255,.72)),radial-gradient(ellipse at 80% 20%,#bdeaff,transparent 45%);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.9)}.hero:before{content:'🌸';position:absolute;font-size:170px;opacity:.17;right:6%;top:-25px;animation:float 5s ease-in-out infinite}.hero:after{content:'☁️';position:absolute;font-size:110px;opacity:.28;right:2%;bottom:0;animation:float 7s ease-in-out infinite}@keyframes float{50%{transform:translateY(-15px)}}.hero-copy{z-index:1;padding:12px 16px}.eyebrow{display:inline-block;background:#fff;border:1px solid #eddfff;border-radius:30px;padding:8px 13px;font-size:12px;font-weight:900;color:var(--purple);box-shadow:0 4px 12px rgba(120,70,190,.1)}h1{font-size:clamp(36px,5vw,64px);line-height:.98;margin:18px 0 14px;font-weight:1000;letter-spacing:-2px}h1 .accent{color:var(--purple)}h1 .pink{color:#f14ca9}.hero-copy p{font-size:17px;line-height:1.55;color:#514b79;max-width:490px;font-weight:700}.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.cta{border:0;border-radius:30px;padding:14px 20px;font-weight:900;display:inline-flex;align-items:center;gap:9px;transition:transform .2s,box-shadow .2s}.cta:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(110,40,210,.2)}.primary{background:linear-gradient(100deg,#7028d8,#a33cf1);color:#fff}.secondary{background:#fff;color:var(--purple);border:1px solid #e8d7ff}.hero-art{min-height:320px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}.calendar-showcase{width:min(90%,390px);height:315px;position:relative;display:flex;align-items:center;justify-content:center}.big-calendar{width:245px;height:275px;border-radius:24px;background:linear-gradient(140deg,#fff,#f5eaff);box-shadow:0 24px 45px rgba(92,40,180,.22);border:8px solid white;transform:rotate(5deg);padding:18px;position:relative;z-index:2}.ring{height:20px;display:flex;justify-content:space-around;margin-top:-24px}.ring i{width:9px;height:23px;border-radius:10px;background:#9c71e8;border:3px solid white}.calendar-illustration{height:155px;border-radius:17px;background:linear-gradient(140deg,#ccecff,#e6d4ff,#ffd9f0);display:flex;align-items:center;justify-content:center;font-size:75px;position:relative;overflow:hidden}.calendar-illustration:after{content:'✦  ✧  ✦';position:absolute;bottom:12px;color:#fff;font-size:21px}.cal-year{font-size:22px;font-weight:1000;text-align:center;color:var(--purple);margin:7px 0 4px}.mini-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:9px;text-align:center;color:#8173a9;font-weight:800}.mini-grid span:nth-child(7n+1){color:#f071b9}.side-calendar{position:absolute;width:160px;height:205px;border-radius:20px;background:white;box-shadow:0 15px 30px rgba(91,48,155,.18);padding:12px;left:0;top:70px;transform:rotate(-9deg);z-index:1}.side-calendar .calendar-illustration{height:105px;font-size:45px}.side-calendar .cal-year{font-size:16px}.spark{position:absolute;color:#ba67ee;font-size:30px;animation:twinkle 2s ease-in-out infinite alternate}@keyframes twinkle{to{opacity:.4;transform:scale(.8)}}.spark.s1{top:20px;left:30px}.spark.s2{right:8px;bottom:25px}.spark.s3{right:20px;top:30px;color:#ff83c4}
+.trust{max-width:1100px;margin:0 auto 28px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:rgba(255,255,255,.78);padding:17px;border:1px solid white;border-radius:25px;box-shadow:var(--shadow)}.trust-item{display:flex;align-items:center;justify-content:center;gap:10px;padding:4px 10px}.trust-item:not(:last-child){border-right:1px solid #dfd0ff}.trust-icon{font-size:25px}.trust-item strong{display:block;font-size:13px}.trust-item small{display:block;color:var(--muted);font-size:11px;font-weight:700}
+section{max-width:1200px;margin:40px auto;padding:0 20px}.section-head{text-align:center;margin-bottom:23px}.section-head .sub{font-weight:900;color:#9a66df;font-size:12px;letter-spacing:1.2px;text-transform:uppercase}.section-head h2{font-size:clamp(26px,4vw,38px);margin:6px 0 8px;letter-spacing:-1px}.section-head p{color:var(--muted);font-weight:700;margin:0}.filters{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin:20px 0}.filter{background:#fff;border:1px solid #e5d5ff;color:#655587;border-radius:25px;padding:9px 17px;font-weight:900;font-size:13px}.filter.active,.filter:hover{background:var(--purple);color:white;border-color:var(--purple)}.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:rgba(255,255,255,.86);border:1px solid white;border-radius:24px;overflow:hidden;box-shadow:0 10px 24px rgba(97,55,160,.1);transition:.22s;display:flex;flex-direction:column}.product:hover{transform:translateY(-6px);box-shadow:0 18px 30px rgba(97,55,160,.18)}.product-art{height:190px;display:flex;align-items:center;justify-content:center;font-size:74px;position:relative;overflow:hidden}.product-art:before{content:'✦ ✧ ✦';position:absolute;top:15px;right:15px;color:rgba(255,255,255,.65)}.art-anime{background:linear-gradient(140deg,#bfeaff,#d6c0ff,#ffcced)}.art-couple{background:linear-gradient(140deg,#ffd8e9,#ffb6d5,#ffe7ba)}.art-game{background:linear-gradient(140deg,#b6eaff,#a7b8ff,#d9bcff)}.art-memory{background:linear-gradient(140deg,#c8f5e6,#b9e4ff,#ffe5b7)}.art-classic{background:linear-gradient(140deg,#fff0d2,#ffe1ad,#f7d8ff)}.art-fantasy{background:linear-gradient(140deg,#c4c4ff,#c4e7ff,#f5ceff)}.product-body{padding:16px;display:flex;flex-direction:column;flex:1}.category{font-size:10px;color:#9b6bdb;font-weight:1000;text-transform:uppercase;letter-spacing:.7px}.product h3{font-size:17px;margin:6px 0}.product p{font-size:12px;color:var(--muted);font-weight:700;line-height:1.45;margin:0 0 12px}.price{font-weight:1000;color:var(--purple);margin-top:auto;margin-bottom:12px}.product-foot{display:flex;gap:8px}.product-foot button{flex:1;padding:10px;border-radius:12px;font-size:12px;font-weight:900}.add{border:0;color:white;background:linear-gradient(90deg,#762ad9,#a03af1)}.details{background:#fff;color:var(--purple);border:1px solid #e6d5ff}
+.custom-box{border-radius:30px;background:linear-gradient(120deg,#fff,#e9e1ff,#e1f6ff);padding:28px;box-shadow:var(--shadow);border:1px solid white;display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:center}.custom-left .bubble{font-size:60px}.custom-left h2{font-size:30px;line-height:1.08;margin:10px 0}.custom-left p{color:var(--muted);font-weight:700;line-height:1.5}.request-form{background:rgba(255,255,255,.8);border-radius:24px;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.request-form label{font-size:12px;font-weight:900;color:#655585}.request-form input,.request-form select,.request-form textarea{width:100%;border:1px solid #e2d4fa;border-radius:12px;background:white;padding:12px;margin-top:5px;outline:none;color:var(--ink)}.request-form input:focus,.request-form textarea:focus,.request-form select:focus{border-color:#a26be6;box-shadow:0 0 0 3px #eadbff}.request-form .full{grid-column:1/-1}.request-form textarea{min-height:90px;resize:vertical}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step{background:rgba(255,255,255,.8);border:1px solid white;border-radius:20px;padding:20px;text-align:center;box-shadow:0 8px 22px rgba(95,55,150,.08)}.step .num{width:34px;height:34px;border-radius:50%;background:#efe2ff;color:var(--purple);display:grid;place-items:center;margin:0 auto 10px;font-weight:1000}.step .emoji{font-size:28px}.step h3{font-size:14px;margin:8px 0}.step p{font-size:12px;color:var(--muted);font-weight:700;margin:0;line-height:1.4}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.benefit{padding:20px;background:rgba(255,255,255,.75);border:1px solid white;border-radius:20px;text-align:center}.benefit .emoji{font-size:32px}.benefit h3{margin:8px 0;font-size:15px}.benefit p{font-size:12px;color:var(--muted);font-weight:700;margin:0;line-height:1.5}.faq{max-width:850px;margin:0 auto}.faq details{background:rgba(255,255,255,.85);border:1px solid white;border-radius:16px;padding:15px 18px;margin:9px 0;box-shadow:0 5px 15px rgba(95,55,150,.06)}.faq summary{font-weight:900;cursor:pointer}.faq p{font-weight:700;color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:0}
+footer{margin-top:55px;background:linear-gradient(110deg,#5520a5,#7c39d3,#a347db);color:white;padding:28px 20px}.footer-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.footer-brand{display:flex;align-items:center;gap:10px;font-weight:1000}.footer-brand img{width:44px;height:44px;background:white;border-radius:12px;padding:3px}.footer-inner p{font-size:12px;opacity:.85;font-weight:700}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,120px);background:#4b248f;color:white;padding:13px 20px;border-radius:25px;box-shadow:0 12px 30px rgba(40,15,90,.3);z-index:99;font-weight:900;transition:.35s}.toast.show{transform:translate(-50%,0)}.modal-bg{position:fixed;inset:0;background:rgba(45,20,80,.38);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;z-index:50;padding:18px}.modal-bg.show{display:flex}.modal{background:white;border-radius:25px;max-width:430px;width:100%;padding:25px;box-shadow:0 20px 60px rgba(35,15,80,.25)}.modal h3{margin:0 0 9px}.modal p{color:var(--muted);font-weight:700;font-size:13px;line-height:1.5}.modal-close{float:right;border:0;background:#f2eaff;border-radius:50%;width:32px;height:32px;font-weight:900;color:var(--purple)}
+@media(max-width:1000px){.nav{gap:10px}.links a{padding:9px;font-size:12px}.hero{margin:18px;padding:20px;min-height:390px}.products{grid-template-columns:repeat(3,1fr)}.trust{margin-left:18px;margin-right:18px}.product-art{height:170px}}
+@media(max-width:720px){.nav{padding:10px 14px;flex-wrap:wrap}.brand img{width:44px;height:44px}.brand-text{font-size:16px}.tagline{font-size:9px}.links{display:none;order:3;width:100%;flex-direction:column;align-items:stretch;padding:8px 0}.links.open{display:flex}.links a{text-align:center}.menu-btn{display:block}.nav-actions{margin-left:auto}.nav-actions .search-btn{display:none}.pill{padding:9px 12px}.hero{margin:12px;border-radius:24px;grid-template-columns:1fr;padding:18px 16px;min-height:0}.hero-copy{padding:3px}.hero-copy p{font-size:14px}h1{font-size:43px}.hero-art{min-height:255px}.calendar-showcase{height:245px}.big-calendar{width:190px;height:220px;padding:12px}.calendar-illustration{height:116px;font-size:57px}.side-calendar{width:130px;height:165px;top:45px}.side-calendar .calendar-illustration{height:80px;font-size:38px}.side-calendar .cal-year{font-size:13px}.trust{grid-template-columns:repeat(2,1fr);padding:12px;margin:12px;border-radius:20px}.trust-item{justify-content:flex-start;padding:8px}.trust-item:nth-child(2){border-right:0}.trust-item strong{font-size:12px}.trust-item small{font-size:10px}.trust-icon{font-size:21px}section{margin:30px auto;padding:0 13px}.products{grid-template-columns:repeat(2,1fr);gap:12px}.product-art{height:140px;font-size:58px}.product-body{padding:12px}.product h3{font-size:14px}.product p{font-size:11px}.product-foot{flex-direction:column}.product-foot button{padding:9px}.custom-box{grid-template-columns:1fr;padding:18px;gap:12px}.custom-left .bubble{font-size:42px}.custom-left h2{font-size:26px}.request-form{grid-template-columns:1fr;padding:14px}.request-form .full{grid-column:auto}.steps{grid-template-columns:repeat(2,1fr)}.benefits{grid-template-columns:1fr}.section-head h2{font-size:28px}.footer-inner{justify-content:center;text-align:center}.footer-brand{justify-content:center;width:100%}}
+@media(max-width:380px){.products{grid-template-columns:1fr}.product-art{height:165px}.steps{grid-template-columns:1fr}.nav-actions .cart{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Mascotte officielle Shadow-kun */
+.hero-art.mascot-stage{min-height:390px;position:relative;overflow:visible;background:radial-gradient(ellipse at 55% 70%,rgba(190,147,255,.3),transparent 58%);}
+.hero-art .mascot-main{width:min(100%,540px);max-height:490px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 12px 18px rgba(83,36,132,.22));animation:mascotFloat 4s ease-in-out infinite;z-index:2}
+@keyframes mascotFloat{50%{transform:translateY(-8px)}}
+@media(max-width:720px){.hero-art.mascot-stage{min-height:270px;margin-top:4px}.hero-art .mascot-main{width:min(100%,380px);max-height:330px;object-position:center bottom}}
+
+
+/* SHADOW FORMAT PRICING */
+.format-choice {
+  display:block;
+  margin:5px 0 12px;
+  color:#655585;
+  font-size:11px;
+  font-weight:900;
+}
+.format-select {
+  display:block;
+  width:100%;
+  margin-top:5px;
+  padding:9px;
+  border:1px solid #e2d4fa;
+  border-radius:10px;
+  background:white;
+  color:#45208d;
+  font-weight:800;
+}
+
+/* SHADOW REAL CART */
+.cart-overlay{position:fixed;inset:0;background:rgba(30,15,55,.48);z-index:1000;display:none;align-items:center;justify-content:center;padding:15px}
+.cart-overlay.show{display:flex}
+.cart-panel{background:#fffaff;width:min(100%,520px);max-height:85vh;overflow:auto;border-radius:24px;padding:22px;box-shadow:0 20px 70px #24104455}
+.cart-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+.cart-head h2{color:#542b91;margin:0;font-size:23px}
+.cart-close{border:0;background:#f2eaff;border-radius:50%;width:36px;height:36px;font-size:18px}
+.cart-empty{text-align:center;padding:30px 10px;color:#806c9c}
+.cart-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #eee4fa}
+.cart-item strong{color:#4d287e}
+.cart-item small{display:block;color:#8b79a5;margin-top:4px}
+.cart-item-price{font-weight:900;color:#6737a5;margin-top:5px}
+.cart-controls{display:flex;align-items:center;gap:8px;margin-top:8px}
+.cart-controls button{border:0;background:#f0e7ff;color:#542b91;border-radius:9px;padding:5px 10px;font-weight:900}
+.cart-remove{background:#fff0f2!important;color:#c34d70!important}
+.cart-total{display:flex;justify-content:space-between;gap:10px;font-size:19px;font-weight:900;color:#542b91;padding:18px 0}
+.cart-order{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(120deg,#8b5bd5,#d477b8);color:white;font-weight:900;font-size:15px}
+.cart-note{font-size:12px;color:#8b79a5;text-align:center;margin-top:10px}
+
+</style>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* SHADOW CALENDAR - Sakura theme */
 body {
-  background: #080808;
-  color: #fff;
-  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #b9eaff, #f4e8ff, #fff1f8) !important;
+  background-attachment: fixed;
 }
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 7%;
-  background: #101010;
-  border-bottom: 1px solid #292929;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.logo span {
-  color: #e32636;
-}
-
-nav a {
-  color: #bbb;
-  text-decoration: none;
-  margin-left: 18px;
-  font-size: 14px;
-}
-
-nav a:hover {
-  color: #e32636;
-}
-
-.cart {
-  background: #e32636;
-  padding: 9px 14px;
-  border-radius: 20px;
-  color: white;
-  font-size: 13px;
-}
-
-.hero {
-  min-height: 520px;
-  padding: 80px 8%;
-  display: flex;
-  align-items: center;
-  background:
-    radial-gradient(circle at 80% 40%, #551018 0%, transparent 35%),
-    linear-gradient(120deg, #090909, #16090b, #090909);
-  overflow: hidden;
-}
-
-.hero-content {
-  max-width: 650px;
-}
-
-.tag {
-  color: #ff4757;
-  letter-spacing: 4px;
-  font-size: 12px;
-  margin-bottom: 20px;
-}
-
-.hero h1 {
-  font-size: clamp(38px, 8vw, 76px);
-  line-height: 1.05;
-  margin-bottom: 20px;
-}
-
-.hero h1 span {
-  color: #e32636;
-}
-
-.hero p {
-  color: #aaa;
-  line-height: 1.8;
-  max-width: 480px;
-  margin-bottom: 28px;
-}
-
-.btn {
-  display: inline-block;
-  border: none;
-  background: #e32636;
-  color: white;
-  padding: 14px 24px;
-  border-radius: 5px;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  transition: 0.25s;
-}
-
-.btn:hover {
-  background: #ff4352;
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px #e3263644;
-}
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid #444;
-  margin-left: 10px;
-}
-
-.btn-outline:hover {
-  border-color: #e32636;
-}
-
-.section {
-  padding: 65px 7%;
-}
-
-.section-title {
-  font-size: 30px;
-  margin-bottom: 12px;
-}
-
-.section-subtitle {
-  color: #888;
-  margin-bottom: 32px;
-}
-
-.categories {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-}
-
-.category {
-  background: #151515;
-  border: 1px solid #333;
-  color: #ccc;
-  padding: 10px 18px;
-  border-radius: 30px;
-  cursor: pointer;
-}
-
-.category.active,
-.category:hover {
-  background: #e32636;
-  color: white;
-  border-color: #e32636;
-}
-
-.products {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.product {
-  background: #121212;
-  border: 1px solid #242424;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: 0.3s;
-}
-
-.product:hover {
-  transform: translateY(-5px);
-  border-color: #9f1b29;
-}
-
-.calendar-preview {
-  height: 260px;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(145deg, #260b10, #101010 70%);
-  position: relative;
-  overflow: hidden;
-}
-
-.calendar-sheet {
-  width: 180px;
-  min-height: 215px;
-  padding: 12px;
-  background: #f4f0e8;
-  color: #171717;
-  text-align: center;
-  border-radius: 4px;
-  box-shadow: 0 10px 35px #000;
-  animation: float 4s ease-in-out infinite;
-}
-
-.calendar-sheet h3 {
-  font-size: 18px;
-  margin: 6px 0;
-  letter-spacing: 2px;
-}
-
-.calendar-sheet .month {
-  font-size: 12px;
-  color: #a51e2d;
-  font-weight: bold;
-  letter-spacing: 3px;
-}
-
-.calendar-sheet .art {
-  height: 85px;
-  border-radius: 3px;
-  margin: 8px 0;
-  background: linear-gradient(135deg, #3a0c13, #d42a3d, #090909);
-}
-
-.calendar-sheet .dates {
-  font-size: 10px;
-  line-height: 1.8;
-  letter-spacing: 2px;
-}
-
-.product-info {
-  padding: 18px;
-}
-
-.product-info h3 {
-  margin-bottom: 8px;
-}
-
-.product-info p {
-  color: #888;
-  font-size: 13px;
-  margin-bottom: 15px;
-}
-
-.product-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.price {
-  font-weight: bold;
-  color: #ff4656;
-}
-
-.customize {
-  border: none;
-  background: #252525;
-  color: white;
-  padding: 10px 13px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.customize:hover {
-  background: #e32636;
-}
-
-.about {
-  background: #101010;
-  text-align: center;
-}
-
-.about p {
-  color: #999;
-  max-width: 700px;
-  margin: 15px auto;
-  line-height: 1.8;
-}
-
-footer {
-  border-top: 1px solid #222;
-  text-align: center;
-  padding: 30px 15px;
-  color: #777;
-  font-size: 13px;
-}
-
-footer span {
-  color: #e32636;
-}
-
-.modal {
-  display: none;
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
-  z-index: 99;
-  background: #000c;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .18;
+  background-image:
+    radial-gradient(circle at 15% 20%, white 0 45px, transparent 47px),
+    radial-gradient(circle at 75% 12%, white 0 60px, transparent 62px),
+    radial-gradient(circle at 90% 35%, #ffcce8 0 3px, transparent 5px);
 }
+</style>
 
-.modal-content {
-  width: 100%;
-  max-width: 420px;
-  background: #151515;
-  border: 1px solid #333;
-  border-radius: 12px;
-  padding: 25px;
-}
 
-.modal-content h2 {
-  margin-bottom: 20px;
-}
-
-.modal-content label {
-  display: block;
-  margin: 12px 0 6px;
-  color: #aaa;
-  font-size: 13px;
-}
-
-.modal-content input,
-.modal-content select {
-  width: 100%;
-  background: #090909;
-  border: 1px solid #333;
-  padding: 12px;
-  color: white;
-  border-radius: 6px;
-}
-
-.modal-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.modal-buttons button {
-  flex: 1;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-@media(max-width: 850px) {
-  .products {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  nav a {
-    margin-left: 8px;
-  }
-}
-
-@media(max-width: 560px) {
-  header {
-    padding: 16px 5%;
-  }
-  .logo {
-    font-size: 17px;
-  }
-  nav a {
-    display: none;
-  }
+<style>/* SHADOW MOBILE HERO FIX */
+@media(max-width:720px) {
   .hero {
-    padding: 65px 6%;
-    min-height: 440px;
+    margin-top: 28px !important;
+    padding-top: 25px !important;
   }
-  .section {
-    padding: 45px 5%;
+  .hero-copy {
+    padding-top: 12px !important;
   }
-  .products {
-    grid-template-columns: 1fr;
-  }
-  .calendar-preview {
-    height: 250px;
+  .eyebrow {
+    position: relative;
+    z-index: 2;
+    line-height: 1.5;
   }
 }
 </style>
+
 </head>
-
 <body>
+<script>for(let i=0;i<13;i++){let p=document.createElement('div');p.className='petal';p.textContent=i%3?'🌸':'✧';p.style.left=Math.random()*100+'vw';p.style.animationDuration=(9+Math.random()*12)+'s';p.style.animationDelay=(-Math.random()*20)+'s';p.style.fontSize=(12+Math.random()*15)+'px';document.body.appendChild(p)}</script>
+<header><nav class="nav">
+<a class="brand" href="#home"><img src="images/logo.svg" alt="Logo Shadow Calendar"><div class="brand-text">SHADOW <span>CALENDAR</span><div class="tagline">CRÉE · PERSONNALISE · IMPRIME</div></div></a>
+<button class="pill menu-btn" id="menuBtn" aria-label="Ouvrir le menu">☰</button>
+<div class="links" id="navLinks"><a href="#home">🏠 Accueil</a><a href="#collection">🛍️ Boutique</a><a href="#custom">✨ Sur mesure</a><a href="#faq">❔ FAQ</a><a href="#contact">✉️ Contact</a></div>
+<div class="nav-actions"><button class="pill search-btn" onclick="showToast('La recherche arrive bientôt 🔎')">🔎</button><button class="pill cart" id="cartBtn">🛒 Panier <span class="count" id="cartCount">0</span></button></div>
+</nav></header>
+<main>
+<div class="hero" id="home"><div class="hero-copy"><span class="eyebrow">🌷 UN PETIT BONHEUR POUR CHAQUE JOUR</span><h1>Plus qu'un<br><span class="accent">calendrier...</span><br>un <span class="pink">souvenir à vie !</span></h1><p>Des calendriers uniques, personnalisés et inspirés de vos univers préférés : anime, gaming, couple, souvenirs et bien plus encore.</p><div class="cta-row"><a class="cta primary" href="#collection">🛍️ Découvrir la collection <span>→</span></a><a class="cta secondary" href="#custom">✨ Créer le mien</a></div></div>
+<div class="hero-art mascot-stage" aria-label="Shadow-kun, mascotte officielle"><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">♡</span><img class="mascot-main" src="images/mascotte.webp" alt="Shadow-kun, mascotte de SHADOW CALENDAR avec son chat"></div></div></div>
+<div class="trust"><div class="trust-item"><span class="trust-icon">💎</span><div><strong>Création soignée</strong><small>Design unique</small></div></div><div class="trust-item"><span class="trust-icon">🎨</span><div><strong>Personnalisation</strong><small>À votre image</small></div></div><div class="trust-item"><span class="trust-icon">🎁</span><div><strong>Idée cadeau</strong><small>Pour tous les moments</small></div></div><div class="trust-item"><span class="trust-icon">💌</span><div><strong>À votre écoute</strong><small>Chaque projet compte</small></div></div></div>
+<section id="collection"><div class="section-head"><div class="sub">Une collection pleine de couleurs</div><h2>🌸 Nos calendriers</h2><p>Choisis ton univers et trouve celui qui te fera sourire toute l'année.</p></div><div class="filters"><button class="filter active" data-filter="all">Tout voir</button><button class="filter" data-filter="anime">Anime</button><button class="filter" data-filter="couple">Couple</button><button class="filter" data-filter="gaming">Gaming</button><button class="filter" data-filter="souvenirs">Souvenirs</button><button class="filter" data-filter="classic">Classique</button></div>
+<div class="products" id="products">
+<article class="product" data-category="anime"><div class="product-art art-anime">🌸🦊</div><div class="product-body"><span class="category">Anime</span><h3>Anime Dream</h3><p>Une année au cœur de ton univers anime préféré.</p>
+<label class="format-choice">Choisir le format
+<select class="format-select" data-extra="2000">
+<option value="A5">A5</option>
+<option value="A4">A4</option>
+<option value="A3">A3</option>
+</select>
+</label>
+<div class="price">10 000 FG</div><div class="product-foot"><button class="add" data-name="Anime Dream">Ajouter au panier</button><button class="details" data-name="Anime Dream">Détails</button></div></div></article>
+<article class="product" data-category="couple"><div class="product-art art-couple">💗🌅</div><div class="product-body"><span class="category">Couple</span><h3>Love Memories</h3><p>Vos dates, vos photos et vos plus beaux souvenirs.</p>
+<label class="format-choice">Choisir le format
+<select class="format-select" data-extra="3000">
+<option value="A5">A5</option>
+<option value="A4">A4</option>
+<option value="A3">A3</option>
+</select>
+</label>
+<div class="price">10 000 FG</div><div class="product-foot"><button class="add" data-name="Love Memories">Ajouter au panier</button><button class="details" data-name="Love Memories">Détails</button></div></div></article>
+<article class="product" data-category="gaming"><div class="product-art art-game">🎮⚡</div><div class="product-body"><span class="category">Gaming</span><h3>Gamer Edition</h3><p>Une touche gaming pour accompagner chaque mois.</p>
+<label class="format-choice">Choisir le format
+<select class="format-select" data-extra="2000">
+<option value="A5">A5</option>
+<option value="A4">A4</option>
+<option value="A3">A3</option>
+</select>
+</label>
+<div class="price">10 000 FG</div><div class="product-foot"><button class="add" data-name="Gamer Edition">Ajouter au panier</button><button class="details" data-name="Gamer Edition">Détails</button></div></div></article>
+<article class="product" data-category="souvenirs"><div class="product-art art-memory">📷🎀</div><div class="product-body"><span class="category">Souvenirs</span><h3>My Memories</h3><p>Transforme tes photos préférées en calendrier.</p>
+<label class="format-choice">Choisir le format
+<select class="format-select" data-extra="5000">
+<option value="A5">A5</option>
+<option value="A4">A4</option>
+<option value="A3">A3</option>
+</select>
+</label>
+<div class="price">10 000 FG</div><div class="product-foot"><button class="add" data-name="My Memories">Ajouter au panier</button><button class="details" data-name="My Memories">Détails</button></div></div></article>
+<article class="product" data-category="classic"><div class="product-art art-classic">🪴🗓️</div><div class="product-body"><span class="category">Classique</span><h3>Soft & Simple</h3><p>Un style doux, minimaliste et facile à assortir.</p>
+<label class="format-choice">Choisir le format
+<select class="format-select" data-extra="0">
+<option value="A5">A5</option>
+<option value="A4">A4</option>
+<option value="A3">A3</option>
+</select>
+</label>
+<div class="price">10 000 FG</div><div class="product-foot"><button class="add" data-name="Soft & Simple">Ajouter au panier</button><button class="details" data-name="Soft & Simple">Détails</button></div></div></article>
+<article class="product" data-category="anime"><div class="product-art art-fantasy">🌙✨</div><div class="product-body"><span class="category">Anime / Fantasy</span><h3>Fantasy Moon</h3><p>Une ambiance magique, céleste et colorée.</p>
+<label class="format-choice">Choisir le format
+<select class="format-select" data-extra="3000">
+<option value="A5">A5</option>
+<option value="A4">A4</option>
+<option value="A3">A3</option>
+</select>
+</label>
+<div class="price">10 000 FG</div><div class="product-foot"><button class="add" data-name="Fantasy Moon">Ajouter au panier</button><button class="details" data-name="Fantasy Moon">Détails</button></div></div></article>
+</div></section>
+<section id="custom"><div class="custom-box"><div class="custom-left"><div class="bubble">🎨💌</div><span class="eyebrow">TON IDÉE, NOTRE CRÉATION</span><h2>Tu n'as pas trouvé ton calendrier ?</h2><p>Anime, artiste, équipe, photos, couleurs ou thème spécial : raconte-nous ce que tu imagines et nous étudierons ta demande personnalisée.</p></div><form class="request-form" id="requestForm"><label>Ton nom<input name="name" placeholder="Comment t'appelles-tu ?" required></label><label>Ton email<input name="email" type="email" placeholder="Adresse email" required></label><label>Thème souhaité<input name="theme" placeholder="Anime, photos, gaming..." required></label><label>Format<select name="format"><option>A4</option><option>A3</option><option>A5</option><option>À discuter</option></select></label><label class="full">Décris ton idée<textarea name="details" placeholder="Couleurs, images, ambiance, détails..." required></textarea></label><button class="cta primary full" type="submit">💌 Envoyer ma demande</button></form></div></section>
+<section id="how"><div class="section-head"><div class="sub">Simple comme bonjour</div><h2>Comment ça marche ?</h2><p>Quatre petites étapes pour donner vie à ton calendrier.</p></div><div class="steps"><div class="step"><div class="num">1</div><div class="emoji">🛍️</div><h3>Choisis ton modèle</h3><p>Parcours la collection et trouve ton préféré.</p></div><div class="step"><div class="num">2</div><div class="emoji">🎨</div><h3>Personnalise</h3><p>Ajoute tes envies ou envoie une demande sur mesure.</p></div><div class="step"><div class="num">3</div><div class="emoji">💌</div><h3>Confirme</h3><p>On échange pour valider les détails et le prix.</p></div><div class="step"><div class="num">4</div><div class="emoji">📦</div><h3>Profite de ton calendrier</h3><p>Ton projet prend forme après confirmation.</p></div></div></section>
+<section id="why"><div class="section-head"><div class="sub">Un petit atelier, de grandes idées</div><h2>Pourquoi SHADOW CALENDAR ?</h2></div><div class="benefits"><div class="benefit"><div class="emoji">💖</div><h3>Créations originales</h3><p>Des idées pensées pour apporter un peu de personnalité à chaque page.</p></div><div class="benefit"><div class="emoji">🖌️</div><h3>Personnalisé avec soin</h3><p>On prend en compte tes envies et ton style.</p></div><div class="benefit"><div class="emoji">🌈</div><h3>Des souvenirs toute l'année</h3><p>Un calendrier à regarder, utiliser et offrir avec plaisir.</p></div></div></section>
+<section id="faq"><div class="section-head"><div class="sub">Les réponses utiles</div><h2>Questions fréquentes</h2></div><div class="faq"><details><summary>Les calendriers sont-ils imprimés ?</summary><p>SHADOW CALENDAR est pensé pour proposer des calendriers imprimés. Les options de papier, dimensions et finition seront confirmées avec chaque commande.</p></details><details><summary>Est-ce que je peux demander un thème qui n'est pas dans la boutique ?</summary><p>Oui ! Utilise le formulaire sur mesure pour décrire ton thème et tes envies. Nous étudierons la demande et te recontacterons.</p></details><details><summary>Comment connaître le prix ?</summary><p>Les tarifs seront affichés pour chaque modèle lorsqu'ils seront définis. Pour les demandes personnalisées, le prix sera confirmé avant validation.</p></details><details><summary>Comment passer commande ?</summary><p>Choisis un modèle ou envoie une demande personnalisée. La confirmation du prix, du paiement et de la livraison se fera avant la production.</p></details></div></section>
+</main>
+<footer id="contact"><div class="footer-inner"><div class="footer-brand"><img src="images/logo.svg" alt="SC"><span>SHADOW CALENDAR<br><small>Crée · Personnalise · Imprime</small></span></div><p>Des calendriers qui font sourire, mois après mois. 🌸</p><p>© 2026 SHADOW CALENDAR</p></div></footer>
 
-<header>
-  <div class="logo">SHADOW <span>CALENDAR</span></div>
-  <nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#boutique">Boutique</a>
-    <a href="#about">À propos</a>
-  </nav>
-  <div class="cart">🛒 <span id="cartCount">0</span></div>
-</header>
-
-<section class="hero" id="accueil">
-  <div class="hero-content">
-    <div class="tag">✦ CRÉE TON PROPRE UNIVERS ✦</div>
-    <h1>Le temps est à toi.<br><span>Ton calendrier aussi.</span></h1>
-    <p>
-      Crée un calendrier unique avec tes photos, tes souvenirs
-      et ton style. Nous transformons tes idées en créations
-      imprimées qui t'accompagnent toute l'année.
-    </p>
-    <a href="#boutique" class="btn">Créer mon calendrier</a>
-    <a href="#about" class="btn btn-outline">Découvrir</a>
-  </div>
-</section>
-
-<section class="section" id="boutique">
-  <h2 class="section-title">Notre collection</h2>
-  <p class="section-subtitle">Choisis un univers. Personnalise. Imprime.</p>
-
-  <div class="categories">
-    <button class="category active" onclick="filterProducts('all', this)">Tout</button>
-    <button class="category" onclick="filterProducts('anime', this)">Anime</button>
-    <button class="category" onclick="filterProducts('love', this)">Couple</button>
-    <button class="category" onclick="filterProducts('photo', this)">Photo</button>
-    <button class="category" onclick="filterProducts('classic', this)">Classique</button>
-  </div>
-
-  <div class="products" id="products">
-
-    <div class="product" data-category="anime">
-      <div class="calendar-preview">
-        <div class="calendar-sheet">
-          <div class="month">JANVIER</div>
-          <div class="art"></div>
-          <h3>SHADOW</h3>
-          <div class="dates">01 02 03 04 05 06 07<br>08 09 10 11 12 13 14<br>15 16 17 18 19 20 21<br>22 23 24 25 26 27 28</div>
-        </div>
-      </div>
-      <div class="product-info">
-        <h3>Anime Shadow</h3>
-        <p>Un style sombre et épique pour les fans d'anime.</p>
-        <div class="product-bottom">
-          <span class="price">Prix à définir</span>
-          <button class="customize" onclick="openModal('Anime Shadow')">Personnaliser</button>
-        </div>
-      </div>
+<!-- SHADOW REAL CART -->
+<div class="cart-overlay" id="cartOverlay">
+  <div class="cart-panel">
+    <div class="cart-head">
+      <h2>🛒 Mon panier</h2>
+      <button class="cart-close" id="cartClose">✕</button>
     </div>
-
-    <div class="product" data-category="love">
-      <div class="calendar-preview" style="background:linear-gradient(145deg,#401522,#170c11)">
-        <div class="calendar-sheet">
-          <div class="month">FÉVRIER</div>
-          <div class="art" style="background:linear-gradient(135deg,#ff9aab,#b52648,#541126)"></div>
-          <h3>LOVE</h3>
-          <div class="dates">01 02 03 04 05 06 07<br>08 09 10 11 12 13 14<br>15 16 17 18 19 20 21<br>22 23 24 25 26 27 28</div>
-        </div>
-      </div>
-      <div class="product-info">
-        <h3>Calendrier Couple</h3>
-        <p>Vos photos et dates importantes dans un seul cadeau.</p>
-        <div class="product-bottom">
-          <span class="price">Prix à définir</span>
-          <button class="customize" onclick="openModal('Calendrier Couple')">Personnaliser</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product" data-category="photo">
-      <div class="calendar-preview" style="background:linear-gradient(145deg,#182a30,#080d10)">
-        <div class="calendar-sheet">
-          <div class="month">MARS</div>
-          <div class="art" style="background:linear-gradient(135deg,#a1c4d2,#284c60,#101b24)"></div>
-          <h3>MY MOMENT</h3>
-          <div class="dates">01 02 03 04 05 06 07<br>08 09 10 11 12 13 14<br>15 16 17 18 19 20 21<br>22 23 24 25 26 27 28</div>
-        </div>
-      </div>
-      <div class="product-info">
-        <h3>Mes souvenirs</h3>
-        <p>Un calendrier avec tes photos et tes meilleurs moments.</p>
-        <div class="product-bottom">
-          <span class="price">Prix à définir</span>
-          <button class="customize" onclick="openModal('Mes souvenirs')">Personnaliser</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product" data-category="classic">
-      <div class="calendar-preview" style="background:linear-gradient(145deg,#35301d,#111)">
-        <div class="calendar-sheet">
-          <div class="month">AVRIL</div>
-          <div class="art" style="background:linear-gradient(135deg,#e8d29c,#8e773f,#36301b)"></div>
-          <h3>GOLD</h3>
-          <div class="dates">01 02 03 04 05 06 07<br>08 09 10 11 12 13 14<br>15 16 17 18 19 20 21<br>22 23 24 25 26 27 28</div>
-        </div>
-      </div>
-      <div class="product-info">
-        <h3>Classic Gold</h3>
-        <p>Un design minimaliste, élégant et professionnel.</p>
-        <div class="product-bottom">
-          <span class="price">Prix à définir</span>
-          <button class="customize" onclick="openModal('Classic Gold')">Personnaliser</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product" data-category="anime">
-      <div class="calendar-preview" style="background:linear-gradient(145deg,#152c20,#080d09)">
-        <div class="calendar-sheet">
-          <div class="month">MAI</div>
-          <div class="art" style="background:linear-gradient(135deg,#92db9c,#23753b,#09200f)"></div>
-          <h3>NATURE</h3>
-          <div class="dates">01 02 03 04 05 06 07<br>08 09 10 11 12 13 14<br>15 16 17 18 19 20 21<br>22 23 24 25 26 27 28</div>
-        </div>
-      </div>
-      <div class="product-info">
-        <h3>Green World</h3>
-        <p>Une ambiance nature, calme et relaxante.</p>
-        <div class="product-bottom">
-          <span class="price">Prix à définir</span>
-          <button class="customize" onclick="openModal('Green World')">Personnaliser</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product" data-category="photo">
-      <div class="calendar-preview" style="background:linear-gradient(145deg,#29203e,#0b0812)">
-        <div class="calendar-sheet">
-          <div class="month">JUIN</div>
-          <div class="art" style="background:linear-gradient(135deg,#c5a3f5,#7045a6,#20123d)"></div>
-          <h3>DREAM</h3>
-          <div class="dates">01 02 03 04 05 06 07<br>08 09 10 11 12 13 14<br>15 16 17 18 19 20 21<br>22 23 24 25 26 27 28</div>
-        </div>
-      </div>
-      <div class="product-info">
-        <h3>Dream Calendar</h3>
-        <p>Couleurs et souvenirs pour un calendrier unique.</p>
-        <div class="product-bottom">
-          <span class="price">Prix à définir</span>
-          <button class="customize" onclick="openModal('Dream Calendar')">Personnaliser</button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="section about" id="about">
-  <h2 class="section-title">Ton histoire. Ton calendrier.</h2>
-  <p>
-    SHADOW CALENDAR transforme tes photos, tes dates et tes idées
-    en calendriers personnalisés. Chaque création est imaginée pour
-    donner une touche personnelle à ton année ou devenir un cadeau unique.
-  </p>
-</section>
-
-<footer>
-  © 2026 <span>SHADOW CALENDAR</span> · Chaque moment mérite sa place.
-</footer>
-
-<!-- Fenêtre de personnalisation -->
-
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h2>Personnaliser</h2>
-
-    <label>Modèle choisi</label>
-    <input id="modelName" readonly>
-
-    <label>Nom sur le calendrier</label>
-    <input id="customerName" placeholder="Ex : Shadow">
-
-    <label>Format</label>
-    <select id="format">
-      <option>A4</option>
-      <option>A3</option>
-      <option>A5</option>
-    </select>
-
-    <label>Couleur préférée</label>
-    <select id="color">
-      <option>Rouge et noir</option>
-      <option>Bleu</option>
-      <option>Violet</option>
-      <option>Or</option>
-      <option>Rose</option>
-    </select>
-
-    <div class="modal-buttons">
-      <button class="customize" onclick="closeModal()">Annuler</button>
-      <button class="btn" onclick="addToCart()">Ajouter</button>
+    <div id="cartItems"></div>
+    <div id="cartSummary" style="display:none">
+      <div class="cart-total"><span>Total</span><span id="cartTotal">0 FG</span></div>
+      <button class="cart-order" id="cartOrder">Continuer vers la commande</button>
+      <p class="cart-note">Les frais de livraison seront calculés séparément.</p>
     </div>
   </div>
 </div>
 
+<div class="toast" id="toast">Ajouté !</div><div class="modal-bg" id="modalBg"><div class="modal"><button class="modal-close" id="modalClose">✕</button><h3 id="modalTitle">Détails du calendrier</h3><p id="modalText"></p><button class="cta primary" id="modalOk">D'accord</button></div></div>
 <script>
-let cart = 0;
+let cart=0;const toast=document.getElementById('toast');let toastTimer;function showToast(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2600)}
 
-function filterProducts(category, button) {
-  document.querySelectorAll(".category").forEach(btn => {
-    btn.classList.remove("active");
-  });
+// SHADOW FORMAT PRICING
+const formatPrices = {A5:10000, A4:15000, A3:25000};
+document.querySelectorAll('.product').forEach(card => {
+  const select = card.querySelector('.format-select');
+  const price = card.querySelector('.price');
+  const add = card.querySelector('.add');
+  if (!select || !price || !add) return;
 
-  button.classList.add("active");
+  function updatePrice() {
+    const total = formatPrices[select.value] + Number(select.dataset.extra);
+    price.textContent = total.toLocaleString('fr-FR') + ' FG';
+    add.dataset.price = total;
+    add.dataset.format = select.value;
+  }
 
-  document.querySelectorAll(".product").forEach(product => {
-    if (category === "all" || product.dataset.category === category) {
-      product.style.display = "";
-    } else {
-      product.style.display = "none";
-    }
-  });
+  select.addEventListener('change', updatePrice);
+  updatePrice();
+});
+
+document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const filter=btn.dataset.filter;document.querySelectorAll('.product').forEach(card=>card.style.display=filter==='all'||card.dataset.category===filter?'flex':'none')}));
+
+// SHADOW REAL CART
+let cartItems = [];
+try { cartItems = JSON.parse(localStorage.getItem('shadowCalendarCart') || '[]'); } catch(e) { cartItems = []; }
+
+const cartOverlay = document.getElementById('cartOverlay');
+const cartItemsBox = document.getElementById('cartItems');
+const cartSummary = document.getElementById('cartSummary');
+
+function saveCart() {
+  localStorage.setItem('shadowCalendarCart', JSON.stringify(cartItems));
+  renderCart();
 }
 
-function openModal(model) {
-  document.getElementById("modelName").value = model;
-  document.getElementById("modal").style.display = "flex";
+function money(value) {
+  return Number(value).toLocaleString('fr-FR') + ' FG';
 }
 
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-}
-
-function addToCart() {
-  const name = document.getElementById("customerName").value.trim();
-
-  if (!name) {
-    alert("Entre le nom à inscrire sur ton calendrier.");
+function renderCart() {
+  const count = cartItems.reduce((sum, item) => sum + item.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  if (!cartItems.length) {
+    cartItemsBox.innerHTML = '<div class="cart-empty">🌸<br><strong>Ton panier est vide</strong><br>Ajoute un calendrier pour commencer.</div>';
+    cartSummary.style.display = 'none';
     return;
   }
 
-  cart++;
-  document.getElementById("cartCount").textContent = cart;
+  cartSummary.style.display = 'block';
+  cartItemsBox.innerHTML = cartItems.map((item, index) => `
+    <div class="cart-item">
+      <div>
+        <strong>${item.name}</strong>
+        <small>Format ${item.format}</small>
+        <div class="cart-item-price">${money(item.price * item.qty)}</div>
+        <div class="cart-controls">
+          <button data-cart-action="minus" data-index="${index}">−</button>
+          <b>${item.qty}</b>
+          <button data-cart-action="plus" data-index="${index}">+</button>
+          <button class="cart-remove" data-cart-action="remove" data-index="${index}">Supprimer</button>
+        </div>
+      </div>
+      <span>${money(item.price)}</span>
+    </div>
+  `).join('');
 
-  alert("Personnalisation ajoutée au panier !");
-
-  closeModal();
+  const total = cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
+  document.getElementById('cartTotal').textContent = money(total);
 }
 
-document.getElementById("modal").addEventListener("click", function(e) {
-  if (e.target === this) closeModal();
+document.querySelectorAll('.add').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const name = btn.dataset.name;
+    const format = btn.dataset.format || 'A5';
+    const price = Number(btn.dataset.price || 10000);
+    const existing = cartItems.find(item => item.name === name && item.format === format);
+    if (existing) existing.qty++;
+    else cartItems.push({name, format, price, qty: 1});
+    saveCart();
+    showToast(name + ' ajouté au panier 🛒');
+  });
+});
+
+document.getElementById('cartBtn').addEventListener('click', () => {
+  renderCart();
+  cartOverlay.classList.add('show');
+});
+
+document.getElementById('cartClose').addEventListener('click', () => cartOverlay.classList.remove('show'));
+cartOverlay.addEventListener('click', e => {
+  if (e.target === cartOverlay) cartOverlay.classList.remove('show');
+});
+
+cartItemsBox.addEventListener('click', e => {
+  const button = e.target.closest('[data-cart-action]');
+  if (!button) return;
+  const index = Number(button.dataset.index);
+  const action = button.dataset.cartAction;
+  if (!cartItems[index]) return;
+
+  if (action === 'plus') cartItems[index].qty++;
+  if (action === 'minus') cartItems[index].qty--;
+  if (action === 'remove' || cartItems[index].qty <= 0) cartItems.splice(index, 1);
+  saveCart();
+});
+
+document.getElementById('cartOrder').addEventListener('click', () => {
+  showToast('La prochaine étape sera la validation de ta commande 📦');
+});
+
+
+// SHADOW DYNAMIC CATALOG
+const dynamicProductsContainer = document.getElementById('products');
+
+fetch('/api/calendars')
+  .then(response => {
+    if (!response.ok) throw new Error('Catalogue indisponible');
+    return response.json();
+  })
+  .then(calendars => {
+    const categoryMap = {
+      'Classique': 'classic',
+      'Anime': 'anime',
+      'Gaming': 'gaming',
+      'Couple': 'couple',
+      'Souvenirs': 'souvenirs',
+      'Fantasy': 'anime'
+    };
+
+    const activeFilter = document.querySelector('.filter.active');
+    const currentFilter = activeFilter ? activeFilter.dataset.filter : 'all';
+
+    calendars.forEach(calendar => {
+      const card = document.createElement('article');
+      card.className = 'product';
+      card.dataset.dynamic = 'true';
+      card.dataset.category = categoryMap[calendar.category] || 'anime';
+      card.style.display =
+        currentFilter === 'all' || card.dataset.category === currentFilter
+          ? 'flex'
+          : 'none';
+
+      const art = document.createElement('div');
+      art.className = 'product-art';
+
+      if (calendar.image) {
+        const img = document.createElement('img');
+        img.src = calendar.image;
+        img.alt = calendar.name;
+        img.loading = 'lazy';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        art.style.padding = '0';
+        art.style.overflow = 'hidden';
+        art.appendChild(img);
+      } else {
+        art.textContent = '🌸📅';
+      }
+
+      const body = document.createElement('div');
+      body.className = 'product-body';
+
+      const category = document.createElement('span');
+      category.className = 'category';
+      category.textContent = calendar.category;
+
+      const title = document.createElement('h3');
+      title.textContent = calendar.name;
+
+      const description = document.createElement('p');
+      description.textContent = calendar.description || 'Calendrier personnalisé SHADOW CALENDAR.';
+
+      const price = document.createElement('div');
+      price.className = 'price';
+      price.textContent = Number(calendar.price).toLocaleString('fr-FR') + ' FG';
+
+      const foot = document.createElement('div');
+      foot.className = 'product-foot';
+
+      const add = document.createElement('button');
+      add.className = 'add';
+      add.textContent = 'Ajouter au panier';
+      add.dataset.name = calendar.name;
+      add.dataset.price = calendar.price;
+      add.dataset.format = 'A5';
+
+      const details = document.createElement('button');
+      details.className = 'details';
+      details.textContent = 'Détails';
+      details.dataset.name = calendar.name;
+      details.dataset.description = calendar.description || '';
+
+      foot.append(add, details);
+      body.append(category, title, description, price, foot);
+      card.append(art, body);
+      dynamicProductsContainer.appendChild(card);
+    });
+  })
+  .catch(error => console.warn('SHADOW CATALOG:', error));
+
+// Actions pour les nouvelles cartes uniquement
+dynamicProductsContainer.addEventListener('click', event => {
+  const card = event.target.closest('.product[data-dynamic="true"]');
+  if (!card) return;
+
+  const addButton = event.target.closest('.add');
+  if (addButton) {
+    const name = addButton.dataset.name;
+    const format = addButton.dataset.format || 'A5';
+    const price = Number(addButton.dataset.price || 0);
+
+    const existing = cartItems.find(item =>
+      item.name === name && item.format === format
+    );
+
+    if (existing) existing.qty++;
+    else cartItems.push({name, format, price, qty: 1});
+
+    saveCart();
+    showToast(name + ' ajouté au panier 🛒');
+    return;
+  }
+
+  const detailsButton = event.target.closest('.details');
+  if (detailsButton) {
+    document.getElementById('modalTitle').textContent = detailsButton.dataset.name;
+    document.getElementById('modalText').textContent =
+      detailsButton.dataset.description ||
+      'Ce modèle pourra être personnalisé selon les options disponibles.';
+    modal.classList.add('show');
+  }
+});
+
+renderCart();
+
+const modal=document.getElementById('modalBg');function closeModal(){modal.classList.remove('show')}document.getElementById('modalClose').onclick=closeModal;document.getElementById('modalOk').onclick=closeModal;modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.querySelectorAll('.details').forEach(btn=>btn.addEventListener('click',()=>{document.getElementById('modalTitle').textContent=btn.dataset.name;document.getElementById('modalText').textContent='Ce modèle pourra être personnalisé selon les options disponibles. Le prix, les formats et les délais seront confirmés avant la commande.';modal.classList.add('show')}));
+document.getElementById('requestForm').addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.target);const name=data.get('name');showToast('Merci '+name+' ! Le formulaire visuel est prêt, mais son envoi email sera connecté dans la prochaine étape.');e.target.reset()});document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+</script>
+
+<style>
+/* SHADOW SAKURA PETALS */
+.sakura-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 30;
+}
+.sakura-petal {
+  position: absolute;
+  top: -30px;
+  width: 13px;
+  height: 17px;
+  border-radius: 80% 10% 80% 10%;
+  background: linear-gradient(135deg,#fff0fa,#ff8fc9);
+  opacity: .75;
+  animation: sakuraFall linear infinite;
+}
+@keyframes sakuraFall {
+  0% { transform: translate3d(0,-30px,0) rotate(0deg); }
+  100% { transform: translate3d(90px,110vh,0) rotate(650deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sakura-petal { animation: none; display: none; }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const layer = document.createElement("div");
+  layer.className = "sakura-layer";
+  layer.setAttribute("aria-hidden", "true");
+  document.body.appendChild(layer);
+
+  for (let i = 0; i < 16; i++) {
+    const petal = document.createElement("span");
+    petal.className = "sakura-petal";
+    petal.style.left = Math.random() * 100 + "%";
+    petal.style.animationDuration = (8 + Math.random() * 9) + "s";
+    petal.style.animationDelay = (-Math.random() * 15) + "s";
+    petal.style.opacity = (0.35 + Math.random() * 0.5);
+    petal.style.transform = "scale(" + (0.5 + Math.random()) + ")";
+    layer.appendChild(petal);
+  }
 });
 </script>
 
-</body>
-</html>
+
+<style>
+/* SHADOW JAPAN WORLD */
+.japan-world {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(180deg,#79d4ff 0%,#c8edff 48%,#fff0f7 100%);
+}
+.japan-sun {
+  position:absolute;
+  width:100px;height:100px;
+  border-radius:50%;
+  background:#ffd6e8;
+  top:12%;right:12%;
+  box-shadow:0 0 55px #ffd6e8;
+}
+.japan-cloud {
+  position:absolute;
+  width:130px;height:38px;
+  border-radius:40px;
+  background:rgba(255,255,255,.85);
+  filter:blur(1px);
+  animation:cloudDrift 32s linear infinite;
+}
+.japan-cloud:before,.japan-cloud:after {
+  content:"";position:absolute;
+  background:inherit;border-radius:50%;
+}
+.japan-cloud:before {width:55px;height:55px;left:20px;top:-25px}
+.japan-cloud:after {width:70px;height:65px;right:15px;top:-32px}
+.japan-cloud.c1 {top:16%;left:-150px}
+.japan-cloud.c2 {top:34%;left:-220px;animation-duration:44s;animation-delay:-18s;transform:scale(.7)}
+.japan-cloud.c3 {top:8%;left:-180px;animation-duration:52s;animation-delay:-30s;transform:scale(.55)}
+@keyframes cloudDrift {
+  from {translate:0 0}
+  to {translate:calc(100vw + 400px) 18px}
+}
+.japan-hills {
+  position:absolute;bottom:0;left:0;width:100%;height:28%;
+  background:linear-gradient(160deg,#b9e7d2,#8bcbb5);
+  clip-path:polygon(0 48%,18% 20%,36% 52%,58% 15%,78% 48%,100% 18%,100% 100%,0 100%);
+  opacity:.8;
+}
+.japan-temple {
+  position:absolute;bottom:16%;left:50%;
+  transform:translateX(-50%);
+  width:120px;height:100px;
+}
+.japan-temple .roof {
+  position:absolute;top:0;left:-20px;width:160px;height:28px;
+  background:#49375f;
+  clip-path:polygon(0 75%,18% 45%,35% 0,65% 0,82% 45%,100% 75%,88% 100%,12% 100%);
+}
+.japan-temple .top {
+  position:absolute;top:25px;left:12px;width:96px;height:15px;
+  background:#d85c83;
+}
+.japan-temple .base {
+  position:absolute;top:40px;left:20px;width:80px;height:60px;
+  background:#f6c8d9;
+  border:5px solid #80516d;
+  border-top:0;
+}
+.japan-temple .door {
+  position:absolute;bottom:0;left:27px;width:26px;height:42px;
+  background:#593c58;border-radius:14px 14px 0 0;
+}
+.japan-tree {
+  position:absolute;bottom:12%;width:14px;height:125px;
+  background:#76516a;border-radius:10px;
+}
+.japan-tree:before {
+  content:"";position:absolute;width:100px;height:90px;
+  left:-43px;top:-45px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#fff0f7 0 20%,#ffb9d5 55%,#e88bb7 100%);
+  box-shadow:25px 20px 0 -8px #ffc6df,-22px 30px 0 -10px #ffd9e9;
+}
+.japan-tree.left {left:7%;transform:rotate(-8deg)}
+.japan-tree.right {right:8%;transform:rotate(8deg) scale(.85)}
+@media(max-width:720px) {
+  .japan-sun {width:65px;height:65px}
+  .japan-temple {transform:translateX(-50%) scale(.7);bottom:13%}
+  .japan-tree.left {left:2%;transform:scale(.7)}
+  .japan-tree.right {right:2%;transform:scale(.65)}
+  .japan-hills {height:22%}
+}
+
+<style>
+/* SHADOW FUJI LANTERNS */
+.japan-fuji {
+  position:absolute;
+  bottom:17%;
+  left:50%;
+  transform:translateX(-50%);
+  width:260px;
+  height:155px;
+  background:linear-gradient(145deg,#718db9,#536c9c);
+  clip-path:polygon(0 100%,38% 18%,48% 32%,56% 0,68% 27%,100% 100%);
+  opacity:.8;
+  z-index:0;
+}
+.japan-fuji:after {
+  content:"";
+  position:absolute;
+  top:0;
+  left:43%;
+  width:42px;
+  height:45px;
+  background:#fff7fc;
+  clip-path:polygon(0 100%,35% 0,65% 0,100% 100%,70% 75%,50% 100%,25% 75%);
+}
+.japan-lantern {
+  position:absolute;
+  bottom:20%;
+  width:27px;
+  height:43px;
+  border-radius:45%;
+  background:linear-gradient(90deg,#e66b8e,#ffcf9e,#e66b8e);
+  box-shadow:0 0 18px #ffb4b9,0 0 35px #ff9eae;
+  animation:lanternGlow 2.5s ease-in-out infinite alternate;
+}
+.japan-lantern:before {
+  content:"";
+  position:absolute;
+  width:15px;
+  height:5px;
+  top:-5px;
+  left:6px;
+  background:#65445e;
+}
+.japan-lantern:after {
+  content:"";
+  position:absolute;
+  width:2px;
+  height:18px;
+  top:43px;
+  left:13px;
+  background:#65445e;
+}
+.japan-lantern.l1 {left:20%}
+.japan-lantern.l2 {right:20%;animation-delay:1s}
+@keyframes lanternGlow {
+  from {filter:brightness(.9);box-shadow:0 0 10px #ffb4b9}
+  to {filter:brightness(1.2);box-shadow:0 0 25px #ff9eae,0 0 40px #ffd1a8}
+}
+@media(max-width:720px) {
+  .japan-fuji {width:180px;height:110px;bottom:15%}
+  .japan-lantern {transform:scale(.75);bottom:18%}
+}
+</style>
+</style>
+<div class="japan-world" aria-hidden="true">
+  <div class="japan-sun"></div>
+  <div class="japan-cloud c1"></div>
+  <div class="japan-cloud c2"></div>
+  <div class="japan-cloud c3"></div>
+  <div class="japan-hills"></div>
+  <div class="japan-tree left"></div>
+  <div class="japan-tree right"></div>
+  <div class="japan-temple">
+    <div class="roof"></div><div class="top"></div>
+    <div class="base"><div class="door"></div></div>
+  </div>
+</div>
+
+
+<!-- SHADOW FUJI LANTERNS -->
+<div class="japan-fuji"></div>
+<div class="japan-lantern l1"></div>
+<div class="japan-lantern l2"></div>
+
+</body></html>

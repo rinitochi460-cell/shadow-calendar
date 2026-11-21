@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHADOW MANAGER | Calendriers</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;background:#09070e;color:#eee;
+font-family:Arial,sans-serif
+}
+header{
+padding:20px;background:#120d1c;
+border-bottom:1px solid #7138a2;
+display:flex;justify-content:space-between;
+align-items:center;flex-wrap:wrap;gap:12px
+}
+.brand{color:#d7a8ff;font-size:21px;font-weight:bold;letter-spacing:2px}
+.sub{font-size:11px;color:#888;margin-top:5px}
+a{color:#cba0f0;text-decoration:none}
+main{max-width:1200px;margin:auto;padding:22px}
+h2{color:#cfa1ff}
+.panel{
+background:#15111e;border:1px solid #39244e;
+border-radius:14px;padding:20px;margin-bottom:20px
+}
+.grid{
+display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+gap:14px
+}
+label{display:block;color:#bb91e3;font-size:13px;margin-bottom:7px}
+input,select,textarea{
+width:100%;background:#0c0a12;color:white;
+border:1px solid #403052;border-radius:8px;
+padding:12px;font-size:14px
+}
+textarea{min-height:100px;resize:vertical}
+.full{grid-column:1/-1}
+button{
+border:0;border-radius:9px;padding:13px 18px;
+cursor:pointer;font-weight:bold
+}
+.publish{
+background:linear-gradient(135deg,#873bc2,#512080);
+color:white
+}
+.draft{
+background:#292132;color:#ddd;border:1px solid #59416c
+}
+.cards{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px
+}
+.calendar{
+background:#100d17;border:1px solid #38234a;
+border-radius:12px;overflow:hidden
+}
+.calendar img{
+width:100%;height:200px;object-fit:cover;background:#1c1626
+}
+.info{padding:15px}
+.info h3{margin:0 0 8px;color:#d5aaff}
+.price{font-size:18px;color:#c58bff;font-weight:bold}
+.status{font-size:12px;margin:10px 0}
+.published{color:#68e0a0}
+.unpublished{color:#e8b75b}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.actions a,.actions button{
+font-size:12px;padding:9px 12px;border-radius:7px
+}
+.edit{background:#332246;color:#ddd}
+.delete{background:#70253c;color:#fff}
+.empty{color:#888;text-align:center;padding:25px}
+.note{font-size:12px;color:#888;line-height:1.6}
+@media(max-width:650px){
+main{padding:12px}
+.grid{grid-template-columns:1fr}
+.full{grid-column:auto}
+}
+</style>
+</head>
+<body>
+<header>
+<div>
+<div class="brand">♛ SHADOW CALENDAR MANAGER</div>
+<div class="sub">CATALOGUE · PUBLICATION · PRODUITS</div>
+</div>
+<a href="/admin/dashboard">← Dashboard</a>
+</header>
+
+<main>
+<section class="panel">
+<h2>Créer un calendrier</h2>
+<form method="POST" action="/admin/calendars/save" enctype="multipart/form-data">
+<input type="hidden" name="csrf" value="{{ csrf_token() }}">
+<div class="grid">
+<div>
+<label>Nom du calendrier</label>
+<input name="name" required maxlength="120" placeholder="Ex : Naruto Shippuden 2027">
+</div>
+<div>
+<label>Catégorie</label>
+<select name="category" required>
+<option value="">Choisir</option>
+<option>Classique</option>
+<option>Anime</option>
+<option>Gaming</option>
+<option>Couple</option>
+<option>Souvenirs</option>
+<option>Fantasy</option>
+</select>
+</div>
+<div>
+<label>Prix (FG)</label>
+<input type="number" name="price" min="0" step="500" required placeholder="15000">
+</div>
+<div>
+<label>Statut</label>
+<select name="status">
+<option value="draft">Brouillon</option>
+<option value="published">Publié</option>
+</select>
+</div>
+<div class="full">
+<label>Description</label>
+<textarea name="description" maxlength="2000" placeholder="Description du calendrier..."></textarea>
+</div>
+<div>
+<label>Image de couverture</label>
+<input type="file" name="image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+</div>
+<div>
+<label>PDF du calendrier</label>
+<input type="file" name="pdf" accept=".pdf,application/pdf">
+</div>
+</div>
+<p class="note">Formats autorisés : JPG, PNG, WEBP et PDF. Taille totale maximale : 20 Mo.</p>
+<br>
+<button class="publish" type="submit">＋ Enregistrer le calendrier</button>
+</form>
+</section>
+
+<section>
+<h2>Catalogue existant · {{ calendars|length }}</h2>
+<div class="cards">
+{% for cal in calendars %}
+<div class="calendar">
+{% if cal.image_path %}
+<img src="{{ url_for('calendar_image', filename=cal.image_path) }}" alt="">
+{% else %}
+<img alt="Aucune couverture">
+{% endif %}
+<div class="info">
+<h3>{{ cal.name }}</h3>
+<div>{{ cal.category or "Sans catégorie" }}</div>
+<div class="price">{{ cal.price }} FG</div>
+<div class="status {% if cal.status == 'published' %}published{% else %}unpublished{% endif %}">
+{% if cal.status == 'published' %}● Publié{% else %}● Brouillon{% endif %}
+</div>
+{% if cal.description %}
+<p class="note">{{ cal.description }}</p>
+{% endif %}
+<div class="actions">
+{% if cal.pdf_path %}
+<a class="edit" href="{{ url_for('calendar_file', filename=cal.pdf_path) }}">Voir PDF</a>
+{% endif %}
+<form method="POST" action="/admin/calendars/delete" onsubmit="return confirm('Supprimer ce calendrier ?')">
+<input type="hidden" name="csrf" value="{{ csrf_token() }}">
+<input type="hidden" name="id" value="{{ cal.id }}">
+<button class="delete" type="submit">Supprimer</button>
+</form>
+</div>
+</div>
+</div>
+{% else %}
+<div class="panel empty">Aucun calendrier créé pour le moment.</div>
+{% endfor %}
+</div>
+</section>
+</main>
+</body>
+</html>
+

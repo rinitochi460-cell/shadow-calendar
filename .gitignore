@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Database and uploaded files
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Backups
+*.bak
+*.before_*
+*_backup*
+*_v1_backup*
+
+# Virtual environments
+venv/
+.venv/
